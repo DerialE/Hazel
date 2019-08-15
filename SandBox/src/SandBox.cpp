@@ -16,7 +16,7 @@ public:
 private:
 
 };
-
+//Here we create Client's Application
 Hazel::Application* Hazel::CreateApplication()
 {
 	return new Sandbox();

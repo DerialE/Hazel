@@ -9,7 +9,12 @@ extern Hazel::Application* Hazel::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	//std::cout << "Hazel Engine" << std::endl;
+	Hazel::Log::Init();
+	HZ_CORE_WARN("Initialized Log!");
+	int var = 5;
+	HZ_INFO("Hello var = {0}",var);
+
+
 	auto app = Hazel::CreateApplication();
 	app->Run();
 	delete app;
