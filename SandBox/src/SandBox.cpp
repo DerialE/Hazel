@@ -5,7 +5,8 @@ class Sandbox : public Hazel::Application
 public:
 	Sandbox()
 	{
-		
+		//first creates base class -> Hazel::Application
+
 	}
 
 	~Sandbox()
@@ -16,6 +17,7 @@ public:
 private:
 
 };
+
 //Here we create Client's Application
 Hazel::Application* Hazel::CreateApplication()
 {
