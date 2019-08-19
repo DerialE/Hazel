@@ -28,6 +28,7 @@ public:
 	{
 		//first creates base class -> Hazel::Application
 		PushLayer(new ExampleLayer());
+		PushLayer(new Hazel::ImGuiLayer());
 	}
 
 	~Sandbox()

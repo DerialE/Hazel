@@ -14,9 +14,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
+IncludeDir["ImGui"] = "Hazel/vendor/imgui"
 
 include "Hazel/vendor/GLFW"
 include "Hazel/vendor/Glad"
+include "Hazel/vendor/imgui"
 -------------------------------------------------------------
 
 project "Hazel"
@@ -26,6 +28,9 @@ project "Hazel"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "hzpch.h"
+	pchsource "Hazel/src/hzpch.cpp"
 
 	files
 	{
@@ -39,12 +44,14 @@ project "Hazel"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
@@ -97,7 +104,7 @@ project "Sandbox"
 	includedirs
 	{
 		"Hazel/vendor/spdlog/include",
-		"Hazel/src",
+		"Hazel/src"
 	}
 
 	links
@@ -112,7 +119,7 @@ project "Sandbox"
 
 		defines
 		{
-			"HZ_PLATFORM_WINDOWS",
+			"HZ_PLATFORM_WINDOWS"
 		}
 
 	filter "configurations:Debug"
@@ -129,5 +136,4 @@ project "Sandbox"
 		defines "HZ_DIST"
 		buildoptions "/MD"
 		optimize "On"
-
 

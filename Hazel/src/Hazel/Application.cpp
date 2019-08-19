@@ -8,11 +8,14 @@
 namespace Hazel
 {
 //"std::placeholders::_1" is the first argument of "Application::x" function 
-// 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+
+	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
 	{
+		HZ_CORE_ASSERT(!s_Instance,"Application already exists!");
+		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 	}
@@ -24,7 +27,7 @@ namespace Hazel
 	{
 		while (m_Running)
 		{
-			glClearColor(0.8f,0.75f,0.6f,1.0f);
+			glClearColor(0.67f,0.75f,0.6f,1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_Window->OnUpdate();
 
@@ -51,11 +54,13 @@ namespace Hazel
 	void Application::PushLayer(Layer * layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer * layer)
 	{
 		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)
