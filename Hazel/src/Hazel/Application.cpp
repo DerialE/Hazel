@@ -29,10 +29,11 @@ namespace Hazel
 		{
 			glClearColor(0.67f,0.75f,0.6f,1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
-			m_Window->OnUpdate();
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			m_Window->OnUpdate();
 		}
 	}
 
