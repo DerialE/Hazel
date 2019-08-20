@@ -7,6 +7,11 @@
 
 #include "Hazel/Application.h"
 
+//sasha1
+#include "imgui_impl_glfw.h"
+//-----------------------------------------------
+
+
 namespace Hazel {
 
 	ImGuiLayer::ImGuiLayer()
@@ -69,10 +74,16 @@ namespace Hazel {
 		m_Time = time;
 
 		ImGui_ImplOpenGL3_NewFrame();
+		//sasha1
+		ImGui_ImplGlfw_NewFrame();
+		//------------------------
 		ImGui::NewFrame();
 
 		static bool show = true;
+
+		ImGui::Begin("Test");
 		ImGui::ShowDemoWindow(&show);
+		ImGui::End();
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

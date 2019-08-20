@@ -7,6 +7,12 @@
 
 #include "glad/glad.h"
 
+//sasha1
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+//#include "imgui_impl_opengl3.h"
+#include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
+//-----------------------------------------------
 
 namespace Hazel {
 
@@ -51,6 +57,14 @@ namespace Hazel {
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+
+		//sasha1
+		ImGui::CreateContext();
+		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
+		const char* glsl_version = "#version 130";
+		ImGui_ImplOpenGL3_Init(glsl_version);
+		//-------------------------------------
+
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		HZ_CORE_ASSERT(status, "Failed to initialize Glad!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
